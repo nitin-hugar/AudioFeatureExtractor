@@ -1,0 +1,45 @@
+Metadata-Version: 2.0
+Name: msaf
+Version: 0.1.70
+Summary: Python module to discover the structure of music files
+Home-page: https://github.com/urinieto/msaf
+Author: Oriol Nieto
+Author-email: oriol@nyu.edu
+License: MIT
+Download-URL: https://github.com/urinieto/msaf/releases
+Keywords: audio music sound
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Multimedia :: Sound/Audio :: Analysis
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Provides-Extra: resample
+Requires-Dist: audioread
+Requires-Dist: cvxopt
+Requires-Dist: decorator
+Requires-Dist: enum34
+Requires-Dist: future
+Requires-Dist: jams (>=0.3.0)
+Requires-Dist: joblib
+Requires-Dist: librosa (>=0.6.0)
+Requires-Dist: matplotlib (>=1.5)
+Requires-Dist: mir-eval
+Requires-Dist: numpy (>=1.8.0)
+Requires-Dist: pandas
+Requires-Dist: scikit-learn (>=0.17.0)
+Requires-Dist: scipy (>=0.13.0)
+Requires-Dist: seaborn
+Requires-Dist: vmo (>=0.3.3)
+Provides-Extra: resample
+Requires-Dist: scikits.samplerate (>=0.3); extra == 'resample'
+
+A python module to segment audio into all its different large-scale sections and label them based on their acoustic similarity
+
+

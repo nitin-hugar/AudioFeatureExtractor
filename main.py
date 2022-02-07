@@ -88,17 +88,22 @@ def detect_downbeats(audioFilePath):
     downbeats = proc(act)
     return downbeats
 
-def detect_tempo(audioFilePath):
-    beats = madmom.features.beats.RNNBeatProcessor()(audioFilePath)
-    when_beats = madmom.features.beats.BeatTrackingProcessor(fps=100)(beats)
-    m_res = scipy.stats.linregress(np.arange(len(when_beats)), when_beats)
+# def detect_tempo(audioFilePath):
+#     beats = madmom.features.beats.RNNBeatProcessor()(audioFilePath)
+#     when_beats = madmom.features.beats.BeatTrackingProcessor(fps=100)(beats)
+#     m_res = scipy.stats.linregress(np.arange(len(when_beats)), when_beats)
 
-    first_beat = m_res.intercept
-    beat_step = m_res.slope
-    detected_tempo = 60 / beat_step
-    if detected_tempo > 160:
-        detected_tempo = detected_tempo // 2
-    return int(np.ceil(detected_tempo))
+#     first_beat = m_res.intercept
+#     beat_step = m_res.slope
+#     detected_tempo = 60 / beat_step
+#     if detected_tempo > 160:
+#         detected_tempo = detected_tempo // 2
+#     return int(np.ceil(detected_tempo))
+
+def detect_tempo(audioFilePath):
+    x, fs = import_audio(audioFilePath)
+    tempo, beats = librosa.beat.beat_track(x, sr=fs, units='time')
+    return tempo 
     
 def detect_key(audioFilePath):
     key_probabilities = madmom.features.key.CNNKeyRecognitionProcessor()
@@ -221,32 +226,32 @@ def main():
     print("Importing file...")
     data, fs = import_audio(audioFilePath)
 
-    print("Extracting onsets...")
-    onsets = detect_onsets(audioFilePath)
+    # print("Extracting onsets...")
+    # onsets = detect_onsets(audioFilePath)
 
-    print("Extracting Beats...")
-    beats = detect_beats(audioFilePath)
+    # print("Extracting Beats...")
+    # beats = detect_beats(audioFilePath)
 
-    print("Extracting Downbeats...")
-    downbeats = detect_downbeats(audioFilePath)
+    # print("Extracting Downbeats...")
+    # downbeats = detect_downbeats(audioFilePath)
 
     print("Extracting Tempo...")
     tempo = detect_tempo(audioFilePath)
 
-    print("Extracting Key...")
-    key = detect_key(audioFilePath)
+    # print("Extracting Key...")
+    # key = detect_key(audioFilePath)
 
-    print("Extracting Chords...")
-    chords = detect_chords_deep_chroma(audioFilePath)
+    # print("Extracting Chords...")
+    # chords = detect_chords_deep_chroma(audioFilePath)
 
-    print("Extracting RMS...")
-    rms = extract_rms(data, 1024, 512, fs)
+    # print("Extracting RMS...")
+    # rms = extract_rms(data, 1024, 512, fs)
 
-    print("Extracting Silence...")
-    silence = detect_silence(data, 1024, 512, fs, thresholdDb=-40)
+    # print("Extracting Silence...")
+    # silence = detect_silence(data, 1024, 512, fs, thresholdDb=-40)
 
-    print("Extracting Boundaries...")
-    boundaries, _ = extract_sections(audioFilePath)
+    # print("Extracting Boundaries...")
+    # boundaries, _ = extract_sections(audioFilePath)
     # notes = pitch_to_midi(data, fs, hopSize=512)
     # print(notes)
     end = time.time()
@@ -254,15 +259,15 @@ def main():
     print("Done!")
     
     feature_dict = {}
-    feature_dict['onsets'] = onsets
-    feature_dict['beats'] = beats
-    feature_dict['downbeats'] = downbeats
+    # feature_dict['onsets'] = onsets
+    # feature_dict['beats'] = beats
+    # feature_dict['downbeats'] = downbeats
     feature_dict['tempo'] = tempo
-    feature_dict['key'] = key
-    feature_dict['chords'] = chords
-    feature_dict['rms'] = rms
-    feature_dict['silence'] = silence
-    feature_dict['boundaries'] = boundaries
+    # feature_dict['key'] = key
+    # feature_dict['chords'] = chords
+    # feature_dict['rms'] = rms
+    # feature_dict['silence'] = silence
+    # feature_dict['boundaries'] = boundaries
     
     with open('feature_dict.csv', 'w') as f:
         for key in feature_dict.keys():

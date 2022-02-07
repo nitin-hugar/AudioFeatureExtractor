@@ -102,7 +102,7 @@ def detect_downbeats(audioFilePath):
 
 def detect_tempo(audioFilePath):
     x, fs = import_audio(audioFilePath)
-    tempo, beats = librosa.beat.beat_track(x, sr=fs, units='time')
+    tempo, beats = librosa.beat.beat_track(x, sr=fs, units='time') # 'units : 'time', 'frames', 'samples'
     return tempo 
     
 def detect_key(audioFilePath):

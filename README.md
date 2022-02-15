@@ -3,7 +3,7 @@
 A script that extracts various features from audio and writes them to a file
 
 
-## Audio Features/ functions: 
+## Audio Features/ Functions: 
 1. Import audio
 2. Block Audio
 3. Fourier Transform 

@@ -24,7 +24,7 @@ A script that extracts various features from audio and writes them to a file
 
 ## Usage: 
 
-(venv) (base) Nitins-Mac:ForestMIR apple$ python3 main.py
+(venv) (base) $ python3 main.py
 
 In the main() function, you can comment out features that you do not want to extract. 
 

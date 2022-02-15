@@ -145,8 +145,10 @@ def extract_rms(data, blockSize, hopSize, fs):
         if not np.all((xb[block] == 0)): # Check for zero errors
             rms[block] = np.sqrt(np.mean(np.square(xb[block])))
             rms[block] = 20 * np.log10(rms[block])
+            if (rms[block] < -90):
+                rms[block] = -90
         else: 
-            rms[block] = 0
+            rms[block] = -90
     return rms
 
 # creates a voicing mask which is 1 when the audio level is above or equal to threhold and 0 when below

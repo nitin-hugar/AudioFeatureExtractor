@@ -1,4 +1,4 @@
-# ForestMIR
+# AudioFeatureExtractor
 
 A script that extracts various features from audio and writes them to a file
 
